@@ -5,3 +5,8 @@
 
 ## ¿Qué se imprime si cambias el 0 por 2000? ¿Cambia el orden?
 No cambia el orden, simplemente el programa espera más tiempo. En este caso, el 2000 son 2 segundos.
+
+## Menciona dos operaciones de una aplicación real (por ejemplo, una app de domicilios) que deberían ser asíncronas y explica por qué.
+Supongo que DiDi y Rappi, porque son aplicaciones que necesitas colas de espera, para manejar más cómodamente la administración de pedidos.
+
+# PARTE 2
