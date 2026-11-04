@@ -1,12 +1,12 @@
 # PARTE 1
 
-## Antes de ejecutarlo, escribe tu predicción. La salida reales 1, 3, 2, aunque la espera sea de cero milisegundos.
+## 1. Antes de ejecutarlo, escribe tu predicción. La salida reales 1, 3, 2, aunque la espera sea de cero milisegundos.
  El orden es así porque setTimeout lo pone en una cola de espera, mientras las otras cosas se cumplen.
 
-## ¿Qué se imprime si cambias el 0 por 2000? ¿Cambia el orden?
+## 2. ¿Qué se imprime si cambias el 0 por 2000? ¿Cambia el orden?
 No cambia el orden, simplemente el programa espera más tiempo. En este caso, el 2000 son 2 segundos.
 
-## Menciona dos operaciones de una aplicación real (por ejemplo, una app de domicilios) que deberían ser asíncronas y explica por qué.
+## 3. Menciona dos operaciones de una aplicación real (por ejemplo, una app de domicilios) que deberían ser asíncronas y explica por qué.
 Supongo que DiDi y Rappi, porque son aplicaciones que necesitas colas de espera, para manejar más cómodamente la administración de pedidos.
 
 # PARTE 2
@@ -39,3 +39,21 @@ Promise.resolve("Carlos")
 
 # PARTE 4
 
+## 1. ¿Por qué console.log(saludar()) no imprime “Hola”?
+Porque él retorna Promise, no texto.
+
+## 2. Tienes que traer el perfil de un usuario y, con su ciudad, el clima de esa ciudad. Además, traer las noticias del día. ¿Qué tareas van en secuencia y cuáles en paralelo?
+- Secuencia: perfil del usuario, ciudad, clima.
+- Paralelo: noticias del día. 
+
+# Caso de estudio: empleados y salarios en tres versiones
+
+## 1. En la versión 3, ¿en qué orden salen los tres mensajes? ¿Por qué no esperan uno al otro?
+En la versión 3, el resultado el empleado de id 1, luego el 3 y uno inexistente porque no existe el id 4. Como funciona por llamado, el orden depende de lo que se llame.
+
+## 2. Si quisieras que los tres se consultaran en orden, uno después del otro, ¿cómo lo escribirías?
+mostrarInformacion(1); 
+mostrarInformacion(2); 
+mostrarInformacion(3); 
+
+## 3. Agrega a los datos una tabla cargos (id, nombre del cargo, idempleado) y una función obtenerCargo. Modifica las tres versiones para mostrar: “El empleado Miguel, Instructor, gana 1000 dólares”. ¿En cuál de las tres fue más fácil?
