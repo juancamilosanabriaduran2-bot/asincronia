@@ -321,37 +321,69 @@
 
 //=========Por Nivel====
 //===Nivel 1===
-function saludarDespuesDe(nombre, segundos, callback) {
-  // 1. Validación de segundos negativos (Convención de error primero)
-  if (segundos < 0) {
-    return callback(new Error('El tiempo de espera no puede ser negativo'), null);
-  }
+// function saludarDespuesDe(nombre, segundos, callback) {
+//   // 1. Validación de segundos negativos (Convención de error primero)
+//   if (segundos < 0) {
+//     return callback(new Error('El tiempo de espera no puede ser negativo'), null);
+//   }
 
-  // 2. setTimeout espera milisegundos (segundos * 1000)
-  setTimeout(() => {
-    // El primer argumento es null porque no hubo error
-    callback(null, nombre);
-  }, segundos * 1000);
-}
+//   // 2. setTimeout espera milisegundos (segundos * 1000)
+//   setTimeout(() => {
+//     // El primer argumento es null porque no hubo error
+//     callback(null, nombre);
+//   }, segundos * 1000);
+// }
 
-function mostrarSaludo(error, nombre) {
-  // Validamos si llegó un error primero
-  if (error) {
-    console.error(`Error: ${error.message}`);
-    return;
-  }
+// function mostrarSaludo(error, nombre) {
+//   // Validamos si llegó un error primero
+//   if (error) {
+//     console.error(`Error: ${error.message}`);
+//     return;
+//   }
   
-  console.log(`¡Hola, ${nombre}! ¿Cómo estás?`);
-}
+//   console.log(`¡Hola, ${nombre}! ¿Cómo estás?`);
+// }
 
-// --- Pruebas de funcionamiento ---
+// // --- Pruebas de funcionamiento ---
 
-// Caso 1: Flujo correcto (Espera 2 segundos)
-saludarDespuesDe('Ana', 2, mostrarSaludo);
-console.log('Esto se imprime primero');
+// // Caso 1: Flujo correcto (Espera 2 segundos)
+// saludarDespuesDe('Ana', 2, mostrarSaludo);
+// console.log('Esto se imprime primero');
 
-// Caso 2: Flujo con error (Se ejecuta inmediatamente sin esperar)
-// saludarDespuesDe('Carlos', -5, mostrarSaludo);
+// // Caso 2: Flujo con error (Se ejecuta inmediatamente sin esperar)
+// // saludarDespuesDe('Carlos', -5, mostrarSaludo);
 
 
 //===Nivel 2===
+let panquequesListos = false;
+function prepararPanqueques(callback) {
+console.log('Preparando panqueques...');
+setTimeout(() => {
+callback('Preparando...😖'); // Llamada al callback con el mensaje
+}, 1000);
+setTimeout(() => {
+callback('Ya casi...😍'); // Llamada al callback con el mensaje
+}, 2000);
+setTimeout(() => {
+callback('Comida lista!!!😋'); // Llamada al callback con el mensaje
+}, 3000);
+while (panquequesListos === false) {
+  for (let i = 0; i < 100; i++) { 
+    setTimeout(() => { 
+    console.log('🥞🥞🥞');
+    }, 4000);
+  }
+  panquequesListos = prompt('¿Más hambre? (y = sí/ n = no)').toLowerCase();
+  if (panquequesListos === 'y') {
+    panquequesListos = false;
+  } else {
+    panquequesListos = true;
+  }
+
+}
+// Simula 3 segundos de preparación
+}
+function servirDesayuno(mensaje) {
+console.log(mensaje);
+}
+prepararPanqueques(servirDesayuno);
