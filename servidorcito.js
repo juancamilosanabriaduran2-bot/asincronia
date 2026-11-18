@@ -199,10 +199,7 @@
 // console.log(saludar()); // Promise { 'Hola' }, no el texto
 // saludar().then((texto) => console.log(texto)); // Hola
 
-
-
 // datos.js — "base de datos" simulada, compartida por las tres versiones
-
 
 // // Versión 1: callbacks
 // const { empleados, salarios } = require('./datos');
@@ -238,8 +235,6 @@
 // else resolve(empleado);
 // }, 500);
 // });
-
-
 
 //==========Código de la versión 3: async/await, con try/catch para manejar errores
 // const empleados = [
@@ -312,15 +307,15 @@
 
 // const ejecutarPruebas = async () => {
 //   console.log("Iniciando consultas...\n");
-  
+
 //   await mostrarInformacion(1); // Caso 1: Todo existe con éxito
 // };
 
 // ejecutarPruebas();
 
-
 //=========Por Nivel====
 //===Nivel 1===
+//===Ejercicio 1===
 // function saludarDespuesDe(nombre, segundos, callback) {
 //   // 1. Validación de segundos negativos (Convención de error primero)
 //   if (segundos < 0) {
@@ -340,7 +335,7 @@
 //     console.error(`Error: ${error.message}`);
 //     return;
 //   }
-  
+
 //   console.log(`¡Hola, ${nombre}! ¿Cómo estás?`);
 // }
 
@@ -353,37 +348,82 @@
 // // Caso 2: Flujo con error (Se ejecuta inmediatamente sin esperar)
 // // saludarDespuesDe('Carlos', -5, mostrarSaludo);
 
+//===Ejercicio 2===
+// let panquequesListos = false;
+// function prepararPanqueques(callback) {
+// console.log('Preparando panqueques...');
+// setTimeout(() => {
+// callback('Preparando...😖'); // Llamada al callback con el mensaje
+// }, 1000);
+// setTimeout(() => {
+// callback('Ya casi...😍'); // Llamada al callback con el mensaje
+// }, 2000);
+// setTimeout(() => {
+// callback('Comida lista!!!😋'); // Llamada al callback con el mensaje
+// }, 3000);
+//  for (let i = 0; i < 100; i++) {
+//     setTimeout(() => {
+//     console.log('🥞🥞🥞');
+//     }, 4000);
+//   }
+// // Simula 3 segundos de preparación
+// }
+// function servirDesayuno(mensaje) {
+// console.log(mensaje);
+// }
+// prepararPanqueques(servirDesayuno);
+
+//===Ejercicio 3===
+// function descargarArchivo(nombre, callback) {
+//   console.log(`Descargando ${nombre}...`);
+//   setTimeout(() => {
+//     const fallo = Math.random() < 0.3; // 30% de probabilidad de fallo
+//     if (fallo) {
+//       callback(new Error(`Falló la descarga de ${nombre}`));
+//     } else {
+//       callback(null, `Archivo ${nombre} descargado con éxito.`);
+//     }
+//   }, 4000);
+// }
+
+// function procesarArchivo(nombre, callback) {
+//   console.log("Procesando archivo...");
+//   setTimeout(() => {
+//     // Esta función no especifica fallos en el enunciado
+//     callback(null, "Archivo procesado");
+//   }, 2000);
+// }
+
+// function enviarCorreo(callback) {
+//   setTimeout(() => {
+//     // Esta función no especifica fallos en el enunciado
+//     callback(null, "Correo de confirmación enviado");
+//   }, 1000);
+// }
+
+// // Ejecución del proceso (Pirámide de la perdición / Callback Hell)
+// descargarArchivo("datos.txt", function (err, archivoDescargado) {
+//   if (err) {
+//     console.error(err.message);
+//     return;
+//   }
+
+//   procesarArchivo(archivoDescargado, function (err, archivoProcesado) {
+//     if (err) {
+//       console.error(err.message);
+//       return;
+//     }
+
+//     enviarCorreo(function (err, correoEnviado) {
+//       if (err) {
+//         console.error(err.message);
+//         return;
+//       }
+
+//       console.log(correoEnviado);
+//       console.log("Proceso terminado");
+//     });
+//   });
+// });
 
 //===Nivel 2===
-let panquequesListos = false;
-function prepararPanqueques(callback) {
-console.log('Preparando panqueques...');
-setTimeout(() => {
-callback('Preparando...😖'); // Llamada al callback con el mensaje
-}, 1000);
-setTimeout(() => {
-callback('Ya casi...😍'); // Llamada al callback con el mensaje
-}, 2000);
-setTimeout(() => {
-callback('Comida lista!!!😋'); // Llamada al callback con el mensaje
-}, 3000);
-while (panquequesListos === false) {
-  for (let i = 0; i < 100; i++) { 
-    setTimeout(() => { 
-    console.log('🥞🥞🥞');
-    }, 4000);
-  }
-  panquequesListos = prompt('¿Más hambre? (y = sí/ n = no)').toLowerCase();
-  if (panquequesListos === 'y') {
-    panquequesListos = false;
-  } else {
-    panquequesListos = true;
-  }
-
-}
-// Simula 3 segundos de preparación
-}
-function servirDesayuno(mensaje) {
-console.log(mensaje);
-}
-prepararPanqueques(servirDesayuno);

@@ -58,3 +58,14 @@ mostrarInformacion(3);
 
 ## 3. Agrega a los datos una tabla cargos (id, nombre del cargo, idempleado) y una función obtenerCargo. Modifica las tres versiones para mostrar: “El empleado Miguel, Instructor, gana 1000 dólares”. ¿En cuál de las tres fue más fácil?
 Fue infinitamente más fácil en Async/Await (Versión 3). Porque No tuve que lidiar con la pirámide de la muerte ni anidamientos complejos (Callbacks), ni tampoco tuve que crear variables globales/externas incómodas para recordar los pasos anteriores (Promesas). Simplemente añadimos una línea de código limpia (const cargo = await obtenerCargo(empleado);) y la variable quedó disponible directamente en el ámbito local para usarla en el console.log.
+
+# Ejercicios por Nivel
+
+# Nivel 1
+## Ejercicio 3
+### Pregunta: cuenta cuántos niveles de anidamiento y cuántos if (err) tiene tu solución.
++ Niveles de anidamiento: Tiene 3 niveles de anidamiento principales (funciones dentro de funciones para lograr la secuencialidad).
++ Cantidad de if (err): Tiene 3 estructuras if (err) (una por cada paso del flujo asíncrono para verificar si la operación anterior falló antes de continuar).
+
+# Nivel 2
+
