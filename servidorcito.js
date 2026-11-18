@@ -202,16 +202,7 @@
 
 
 // datos.js — "base de datos" simulada, compartida por las tres versiones
-const empleados = [
-{ id: 1, nombre: 'Miguel' },
-{ id: 2, nombre: 'Yenny' },
-{ id: 3, nombre: 'MCamila' },
-];
-const salarios = [
-{ id: 1, salario: 1000, idempleado: 1 },
-{ id: 2, salario: 2000, idempleado: 2 },
-];
-module.exports = { empleados, salarios };
+
 
 // // Versión 1: callbacks
 // const { empleados, salarios } = require('./datos');
@@ -236,13 +227,7 @@ module.exports = { empleados, salarios };
 // callback(null, registro.salario);
 // }, 500);
 // };
-// obtenerEmpleado(1, (err, empleado) => {
-// if (err) return console.log(err.message);
-// obtenerSalario(empleado, (err, salario) => {
-// if (err) return console.log(err.message);
-// console.log(`El empleado ${empleado.nombre} gana ${salario} dólares`);
-// });
-// });
+
 // // Versión 2: promesas
 // const { empleados, salarios } = require('./datos');
 // const obtenerEmpleado = (id) =>
@@ -253,37 +238,120 @@ module.exports = { empleados, salarios };
 // else resolve(empleado);
 // }, 500);
 // });
-// const obtenerSalario = (empleado) =>
-// new Promise((resolve, reject) => {
-// setTimeout(() => {
-// const registro = salarios.find((s) => s.idempleado === empleado.id);
-// if (!registro) reject(new Error(`El empleado ${empleado.nombre} no tiene
-// salario`));
-// else resolve(registro.salario);
-// }, 500);
-// });
-// // Necesitamos el empleado en el último paso, así que lo guardamos fuera de la cadena
-// let empleadoEncontrado;
-// obtenerEmpleado(1)
-// .then((empleado) => {
-// empleadoEncontrado = empleado;
-// return obtenerSalario(empleado); // retornar evita el .then anidado
-// })
-// .then((salario) => {
-// console.log(`El empleado ${empleadoEncontrado.nombre} gana ${salario} dólares`);
-// })
-// .catch((err) => console.log(err.message));
-// Versión 3: async/await (usa las mismas funciones de la versión 2)
-const mostrarInformacion = async (id) => {
-try {
-const empleado = await obtenerEmpleado(id);
-const salario = await obtenerSalario(empleado);
 
-console.log(`El empleado ${empleado.nombre} gana ${salario} dólares`);
-} catch (err) {
-console.log(err.message);
+
+
+//==========Código de la versión 3: async/await, con try/catch para manejar errores
+// const empleados = [
+//   { id: 1, nombre: 'Miguel' },
+//   { id: 2, nombre: 'Yenny' },
+//   { id: 3, nombre: 'MCamila' },
+// ];
+
+// const salarios = [
+//   { id: 1, salario: 1000, idempleado: 1 },
+//   { id: 2, salario: 2000, idempleado: 2 },
+// ];
+
+// const cargos = [
+//   { id: 1, nombre: 'Instructor', idempleado: 1 },
+//   { id: 2, nombre: 'Contadora', idempleado: 2 },
+//   { id: 3, nombre: 'Diseñadora', idempleado: 3 },
+// ];
+
+// const obtenerEmpleado = (id) => {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       const empleado = empleados.find((e) => e.id === id);
+//       if (!empleado) {
+//         reject(new Error(`El empleado con id ${id} no existe`));
+//       } else {
+//         resolve(empleado);
+//       }
+//     }, 500);
+//   });
+// };
+
+// const obtenerCargo = (empleado) => {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       const registro = cargos.find((c) => c.idempleado === empleado.id);
+//       if (!registro) {
+//         reject(new Error(`El empleado ${empleado.nombre} no tiene cargo`));
+//       } else {
+//         resolve(registro.nombre);
+//       }
+//     }, 500);
+//   });
+// };
+
+// const obtenerSalario = (empleado) => {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       const registro = salarios.find((s) => s.idempleado === empleado.id);
+//       if (!registro) {
+//         reject(new Error(`El empleado ${empleado.nombre} no tiene salario`));
+//       } else {
+//         resolve(registro.salario);
+//       }
+//     }, 500);
+//   });
+// };
+
+// const mostrarInformacion = async (id) => {
+//   try {
+//     const empleado = await obtenerEmpleado(id);
+//     const cargo = await obtenerCargo(empleado);
+//     const salario = await obtenerSalario(empleado);
+
+//     console.log(`El empleado ${empleado.nombre}, ${cargo}, gana ${salario} dólares`);
+//   } catch (err) {
+//     console.log(err.message);
+//   }
+// };
+
+// const ejecutarPruebas = async () => {
+//   console.log("Iniciando consultas...\n");
+  
+//   await mostrarInformacion(1); // Caso 1: Todo existe con éxito
+// };
+
+// ejecutarPruebas();
+
+
+//=========Por Nivel====
+//===Nivel 1===
+function saludarDespuesDe(nombre, segundos, callback) {
+  // 1. Validación de segundos negativos (Convención de error primero)
+  if (segundos < 0) {
+    return callback(new Error('El tiempo de espera no puede ser negativo'), null);
+  }
+
+  // 2. setTimeout espera milisegundos (segundos * 1000)
+  setTimeout(() => {
+    // El primer argumento es null porque no hubo error
+    callback(null, nombre);
+  }, segundos * 1000);
 }
-};
-mostrarInformacion(1); // gana 1000
-mostrarInformacion(3); // no tiene salario
-mostrarInformacion(4); // no existe
+
+function mostrarSaludo(error, nombre) {
+  // Validamos si llegó un error primero
+  if (error) {
+    console.error(`Error: ${error.message}`);
+    return;
+  }
+  
+  console.log(`¡Hola, ${nombre}! ¿Cómo estás?`);
+}
+
+// --- Pruebas de funcionamiento ---
+
+// Caso 1: Flujo correcto (Espera 2 segundos)
+saludarDespuesDe('Ana', 2, mostrarSaludo);
+console.log('Esto se imprime primero');
+
+// Caso 2: Flujo con error (Se ejecuta inmediatamente sin esperar)
+// saludarDespuesDe('Carlos', -5, mostrarSaludo);
+
+
+//===Nivel 2===
