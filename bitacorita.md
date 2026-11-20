@@ -130,9 +130,3 @@ Es opcional. Antes de desarrollarlo hay que comprobar en la documentación ofici
 
 ## 2. Diferencia entre petición fallida y petición sin resultados
 Una petición fallida ocurre cuando hay un problema de red, autenticación o respuesta HTTP no exitosa. Una petición sin resultados puede ser una respuesta HTTP exitosa cuyo arreglo de resultados está vacío. El código debe manejar por separado los errores de la petición y la ausencia de coincidencias.
-
----
-
-# NOTAS SOBRE EL DESARROLLO
-
-Las respuestas anteriores se redactaron conservando un estilo directo, con explicaciones breves y ejemplos cuando ayudan a demostrar el razonamiento. Se ajustaron algunas afirmaciones para que describan con precisión el comportamiento de JavaScript. Las salidas de APIs externas dependen de la respuesta del servicio y de las credenciales disponibles.
