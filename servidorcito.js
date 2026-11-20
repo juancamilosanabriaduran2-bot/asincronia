@@ -673,7 +673,14 @@ async function prepararPedido() {
 // Para probar Promise.allSettled, cada cocinero debe devolver una promesa
 // que pueda rechazarse. Este ejemplo muestra el estado individual.
 async function revisarCocineros() {
-  const resultados = await Promise.allSettled(cocineros.map((cocinero) => cocinar(cocinero)));
+  const tareas = cocineros.map((cocinero, indice) => {
+    if (indice === 1) {
+      return Promise.reject(new Error('Se quemó un ingrediente'));
+    }
+    return cocinar(cocinero);
+  });
+
+  const resultados = await Promise.allSettled(tareas);
   resultados.forEach((resultado, indice) => {
     if (resultado.status === 'fulfilled') {
       console.log(resultado.value);
